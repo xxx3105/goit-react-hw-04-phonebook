@@ -15,13 +15,18 @@ const savedContacts = [
 ];
 
 export const App = () => {
-  const [contacts, setContacts] = useState(function phoneHandler() {
-    const storedData = localStorage.getItem('contacts');
-    if (storedData) {
-      return JSON.parse(storedData);
-    }
-    return [];
-  });
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) || []
+  );
+  // const [contacts, setContacts] = useState(
+  //   function phoneHandler() {
+  //   const storedData = localStorage.getItem('contacts');
+  //   if (storedData) {
+  //     return JSON.parse(storedData);
+  //   }
+  //   return [];
+  // }
+  // );
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
