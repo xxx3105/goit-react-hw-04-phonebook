@@ -15,19 +15,14 @@ const savedContacts = [
 ];
 
 export const App = () => {
-  const [contacts, setContacts] = useState([...savedContacts]);
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    try {
-      const storedData = localStorage.getItem('contacts');
-      if (storedData) {
-        setContacts(JSON.parse(storedData));
-      }
-    } catch (error) {
-      console.log(error);
+  const [contacts, setContacts] = useState(function phoneHandler() {
+    const storedData = localStorage.getItem('contacts');
+    if (storedData) {
+      return JSON.parse(storedData);
     }
-  }, []);
+    return [];
+  });
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
